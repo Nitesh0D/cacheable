@@ -1,0 +1,15 @@
+<template>
+    <lightning-input label="Search Accounts"
+
+    placeholder="Type here to search"
+
+    onchange={handleChange}>
+
+   </lightning-input>
+
+<template for:each={accList} for:item="acc">
+
+<p key={acc.id}>{acc.Name}</p>
+
+</template>
+</template>
