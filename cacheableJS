@@ -1,0 +1,58 @@
+import { LightningElement ,track,wire } from 'lwc';
+import getRecords from '@salesforce/apex/AccountController.getRecords'
+export default class ChildComp extends LightningElement 
+    {
+
+        @track accList ;
+   
+        @track searchValue;
+   
+   
+   
+        handleChange(event)
+   
+        {
+   
+          this.searchValue = event.target.value;
+   
+          console.log('Search Value--->'+this.searchValue);
+   
+         /* getRecords({searchKey : this.searchValue})  //It use for withou cacheable concept
+   
+          .then(result =>
+   
+           {
+   
+             this.accList = result;
+   
+           })*/
+   
+   
+   
+        }
+   
+        @wire(getRecords,{searchKey : '$searchValue'})
+   
+        wiredAccounts({error,data})
+   
+        {
+   
+          if(data)
+   
+          {
+   
+             this.accList = data;
+   
+          }
+   
+          else
+   
+          {
+   
+            console.log('Errors -->'+JSON.stringify(error));
+   
+          }
+   
+        }
+   
+   }
