@@ -1,0 +1,12 @@
+public class AccountController
+{
+@AuraEnabled(cacheable = true)
+public static List<Account> getRecords(String searchKey)
+{
+String query = '';
+String name = '%'+searchKey+'%';
+query = 'Select Name from Account where Name LIKE : name';
+List<sObject> recordList = Database.query(query);
+return recordList;
+}
+}
